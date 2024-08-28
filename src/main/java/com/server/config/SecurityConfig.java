@@ -82,6 +82,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         corsConfiguration.setAllowedOrigins(
                 Arrays.asList("https://rental-cars-e2fec67ef6cf.herokuapp.com",
+                        "https://rental-cars-e2fec67ef6cf.herokuapp.com/**",
                         "http://localhost:3000"));
         corsConfiguration.setAllowedMethods(Collections.singletonList(CorsConfiguration.ALL));
         corsConfiguration.setAllowedHeaders(
