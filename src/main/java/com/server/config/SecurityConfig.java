@@ -30,7 +30,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private final JwtAuthenticationEntryPoint unauthorizedHandler;
 
-    public SecurityConfig(UserService userService, BCryptPasswordEncoder bCryptPasswordEncoder, JwtAuthenticationEntryPoint unauthorizedHandler) {
+    public SecurityConfig(UserService userService, BCryptPasswordEncoder bCryptPasswordEncoder,
+            JwtAuthenticationEntryPoint unauthorizedHandler) {
         this.userService = userService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.unauthorizedHandler = unauthorizedHandler;
@@ -47,26 +48,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
-                    .cors()
+                .cors()
                 .and()
-                    .csrf()
-                        .disable()
-                    .exceptionHandling()
-                    .authenticationEntryPoint(unauthorizedHandler)
+                .csrf()
+                .disable()
+                .exceptionHandling()
+                .authenticationEntryPoint(unauthorizedHandler)
                 .and()
-                    .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                    .antMatchers("/cars/all", "/cars/**").permitAll()
-                    .antMatchers( "/login", "/users/register").anonymous()
-                    .antMatchers("/sales/all/**","/cars/reserve/**","/cars/available").hasAuthority("USER")
-                    .antMatchers("/rents/active","/rents/pending","/cars/edit/**","/cars/delete/:id","/cars/create").hasAuthority("ADMIN")
-                    .anyRequest().authenticated()
+                .antMatchers("/cars/all", "/cars/**").permitAll()
+                .antMatchers("/login", "/users/register").anonymous()
+                .antMatchers("/sales/all/**", "/cars/reserve/**", "/cars/available")
+                .hasAuthority("USER")
+                .antMatchers("/rents/active", "/rents/pending", "/cars/edit/**", "/cars/delete/:id",
+                        "/cars/create").hasAuthority("ADMIN")
+                .anyRequest().authenticated()
                 .and()
-                    .addFilter(new JwtAuthenticationFilter(authenticationManager()))
-                    .addFilter(new JwtAuthorizationFilter(authenticationManager(), this.userService));
-
+                .addFilter(new JwtAuthenticationFilter(authenticationManager()))
+                .addFilter(new JwtAuthorizationFilter(authenticationManager(), this.userService));
 
 
     }
@@ -77,9 +79,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         CorsConfiguration corsConfiguration = new CorsConfiguration();
 
-        corsConfiguration.setAllowedOrigins(Arrays.asList("https://rental-cars-e2fec67ef6cf.herokuapp.com", "http://localhost:3000"));
-        corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "DELETE", "PUT" ));
-        corsConfiguration.setAllowedHeaders(Arrays.asList("X-Requested-With", "Origin", "Content-Type", "Accept", "Authorization"));
+        corsConfiguration.setAllowedOrigins(
+                Arrays.asList("https://rental-cars-e2fec67ef6cf.herokuapp.com",
+                        "http://localhost:3000"));
+        corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "DELETE", "PUT"));
+        corsConfiguration.setAllowedHeaders(
+                Arrays.asList("X-Requested-With", "Origin", "Content-Type", "Accept",
+                        "Authorization"));
+        corsConfiguration.setAllowedHeaders(
+                Arrays.asList("Access-Control-Allow-Headers", "Access-Control-Allow-Origin"));
         corsConfiguration.setAllowCredentials(true);
 
         source.registerCorsConfiguration("/**", corsConfiguration);
@@ -93,7 +101,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .userDetailsService(this.userService)
                 .passwordEncoder(this.bCryptPasswordEncoder);
     }
-
 
 
 }
