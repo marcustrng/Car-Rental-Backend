@@ -79,18 +79,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-
-        corsConfiguration.setAllowedOrigins(
-                Arrays.asList("https://rental-cars-e2fec67ef6cf.herokuapp.com",
-                        "https://rental-cars-e2fec67ef6cf.herokuapp.com/**",
-                        "http://localhost:3000"));
+        corsConfiguration.setAllowedOrigins(Collections.singletonList(CorsConfiguration.ALL));
         corsConfiguration.setAllowedMethods(Collections.singletonList(CorsConfiguration.ALL));
-        corsConfiguration.setAllowedHeaders(
-                Arrays.asList("X-Requested-With", "Origin", "Content-Type", "Accept",
-                        "Authorization", "Access-Control-Allow-Headers",
-                        "Access-Control-Allow-Origin"));
+        corsConfiguration.setAllowedHeaders(Collections.singletonList(CorsConfiguration.ALL));
         corsConfiguration.setAllowCredentials(true);
-
         source.registerCorsConfiguration("/**", corsConfiguration);
 
         return source;
