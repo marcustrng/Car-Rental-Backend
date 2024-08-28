@@ -3,6 +3,7 @@ package com.server.config;
 import com.server.services.UserService;
 import com.server.web.filters.JwtAuthenticationFilter;
 import com.server.web.filters.JwtAuthorizationFilter;
+import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -80,9 +81,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
 
         corsConfiguration.setAllowedOrigins(
-                Arrays.asList("https://rental-cars-e2fec67ef6cf.herokuapp.com/**",
+                Arrays.asList("https://rental-cars-e2fec67ef6cf.herokuapp.com",
                         "http://localhost:3000"));
-        corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "DELETE", "PUT"));
+        corsConfiguration.setAllowedMethods(Collections.singletonList(CorsConfiguration.ALL));
         corsConfiguration.setAllowedHeaders(
                 Arrays.asList("X-Requested-With", "Origin", "Content-Type", "Accept",
                         "Authorization", "Access-Control-Allow-Headers",
