@@ -1,39 +1,22 @@
 package com.server.domain.models.binding;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class WithinDatesAndUserNameModel {
+
+    @NotNull
     private LocalDate startDate;
+
+    @NotNull
     private LocalDate endDate;
+
     private String username;
-
-    public WithinDatesAndUserNameModel() {
-    }
-
-    @NotNull
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    @NotNull
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 }

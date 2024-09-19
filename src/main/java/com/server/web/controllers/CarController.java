@@ -76,8 +76,8 @@ public class CarController {
 
     @PostMapping("/available")
     public Page<CarViewModel> availableCars(Pageable pageable,
-            @RequestBody @Valid WithinDatesAndUserNameModel model,
-            @RequestParam(value = "query", required = false) String query) {
+                                            @RequestBody @Valid WithinDatesAndUserNameModel model,
+                                            @RequestParam(value = "query", required = false) String query) {
         return this.carService.allAvailableCars(pageable, model, query);
     }
 

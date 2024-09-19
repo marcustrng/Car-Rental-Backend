@@ -3,7 +3,9 @@ package com.server.config;
 import com.server.services.UserService;
 import com.server.web.filters.JwtAuthenticationFilter;
 import com.server.web.filters.JwtAuthorizationFilter;
+
 import java.util.Collections;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtAuthenticationEntryPoint unauthorizedHandler;
 
     public SecurityConfig(UserService userService, BCryptPasswordEncoder bCryptPasswordEncoder,
-            JwtAuthenticationEntryPoint unauthorizedHandler) {
+                          JwtAuthenticationEntryPoint unauthorizedHandler) {
         this.userService = userService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.unauthorizedHandler = unauthorizedHandler;
@@ -60,7 +62,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/cars/all", "/cars/**").permitAll()
+                .antMatchers(
+                        "/cars/all",
+                        "/cars/**",
+                        "/v3/api-docs/**",
+                        "/swagger-ui/**",
+                        "/swagger-ui.html").permitAll()
                 .antMatchers("/login", "/users/register").anonymous()
                 .antMatchers("/sales/all/**", "/cars/reserve/**", "/cars/available")
                 .hasAuthority("USER")
