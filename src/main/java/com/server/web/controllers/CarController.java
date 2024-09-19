@@ -81,19 +81,10 @@ public class CarController {
         return this.carService.allAvailableCars(pageable, model, query);
     }
 
-//    @PostMapping("/check/{id}")
-//    public boolean checkCarAvailability(@PathVariable String id,
-//            @RequestBody @Valid WithinDatesAndUserNameModel model) {
-//
-//        return this.carService.checkAvailability(id, model.getStartDate(), model.getEndDate());
-//    }
+   @PostMapping("/check/{id}")
+   public boolean checkCarAvailability(@PathVariable String id,
+           @RequestBody @Valid WithinDatesAndUserNameModel model) {
 
-    @GetMapping("/check/{id}")
-    public boolean checkCarAvailability(@PathVariable String id,
-            @RequestParam(name = "startDate") LocalDate startDate,
-            @RequestParam(name = "endDate") LocalDate endDate) {
-
-        return this.carService.checkAvailability(id, startDate, endDate);
-    }
-
+       return this.carService.checkAvailability(id, model.getStartDate(), model.getEndDate());
+   }
 }
