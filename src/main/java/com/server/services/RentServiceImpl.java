@@ -3,8 +3,8 @@ package com.server.services;
 import com.server.domain.entities.Car;
 import com.server.domain.entities.Rent;
 import com.server.domain.entities.User;
-import com.server.domain.models.binding.WithinDatesAndUserNameModel;
 import com.server.domain.models.binding.RentCreateBindingModel;
+import com.server.domain.models.binding.WithinDatesAndUserNameModel;
 import com.server.domain.models.view.RentViewModel;
 import com.server.exceptions.CarNotFoundException;
 import com.server.exceptions.RentNotFoundException;
@@ -17,8 +17,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -80,7 +82,14 @@ public class RentServiceImpl implements RentService {
 
     @Override
     public RentViewModel getById(String id) {
-        return PageMapper.map(this.rentRepository.findById(id), RentViewModel.class, modelMapper);
+        Optional<Rent> byId = this.rentRepository.findById(id);
+        if (byId.isPresent()) {
+            // If present, return the Rent object
+            return PageMapper.map(byId.get(), RentViewModel.class, modelMapper);
+        } else {
+            // Handle the case where the Rent object is not found
+            throw new EntityNotFoundException("Rent with ID " + id + " not found");
+        }
     }
 
     @Override
