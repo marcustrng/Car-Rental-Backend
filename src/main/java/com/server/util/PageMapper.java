@@ -14,8 +14,8 @@ public class PageMapper {
         List<S> sourceList = source.getContent();
 
         List<T> list = new ArrayList<>();
-        for (int i = 0; i < sourceList.size(); i++) {
-            T target = mapper.map(sourceList.get(i), targetClass);
+        for (S s : sourceList) {
+            T target = mapper.map(s, targetClass);
             list.add(target);
         }
 

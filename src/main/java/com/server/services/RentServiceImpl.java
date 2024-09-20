@@ -40,16 +40,16 @@ public class RentServiceImpl implements RentService {
 
     @Override
     public RentViewModel createRent(WithinDatesAndUserNameModel model, String carId) {
-        RentCreateBindingModel rentModel = this.modelMapper.map(model,RentCreateBindingModel.class);
+        RentCreateBindingModel rentModel = this.modelMapper.map(model, RentCreateBindingModel.class);
 
         Car car = this.carRepository.findFirstById(carId);
 
-        if(car == null){
+        if (car == null) {
             throw new CarNotFoundException();
         }
 
         User user = (User) this.userService.loadUserByUsername(model.getUsername());
-        if(user == null){
+        if (user == null) {
             throw new UserNotFoundException();
         }
 
@@ -65,23 +65,23 @@ public class RentServiceImpl implements RentService {
 
     @Override
     public Page<RentViewModel> allUnapprovedRents(Pageable pageable) {
-        return PageMapper.mapPage(this.rentRepository.findAllByApproved(pageable,false),RentViewModel.class,modelMapper);
+        return PageMapper.mapPage(this.rentRepository.findAllByApproved(pageable, false), RentViewModel.class, modelMapper);
     }
 
     @Override
     public Page<RentViewModel> allApprovedRents(Pageable pageable) {
-        return PageMapper.mapPage(this.rentRepository.findAllByApproved(pageable,true),RentViewModel.class,modelMapper);
+        return PageMapper.mapPage(this.rentRepository.findAllByApproved(pageable, true), RentViewModel.class, modelMapper);
     }
 
     @Override
     public Page<RentViewModel> allActiveRents(Pageable pageable) {
-        return PageMapper.mapPage(this.rentRepository.findAllByFinishedAndApproved(pageable,false,  true),RentViewModel.class,modelMapper);
+        return PageMapper.mapPage(this.rentRepository.findAllByFinishedAndApproved(pageable, false, true), RentViewModel.class, modelMapper);
     }
 
     @Override
     public boolean approveRent(String id) {
         Rent rent = this.rentRepository.getOne(id);
-        if(rent.getId() == null){
+        if (rent.getId() == null) {
             throw new RentNotFoundException();
         }
 
@@ -97,7 +97,7 @@ public class RentServiceImpl implements RentService {
 
         Rent rent = this.rentRepository.getOne(id);
 
-        if(rent.getId() == null){
+        if (rent.getId() == null) {
             throw new RentNotFoundException();
         }
 
@@ -115,7 +115,7 @@ public class RentServiceImpl implements RentService {
 
         Rent rent = this.rentRepository.getOne(id);
 
-        if(rent.getId() == null){
+        if (rent.getId() == null) {
             throw new RentNotFoundException();
         }
 
@@ -125,8 +125,8 @@ public class RentServiceImpl implements RentService {
 
         rentRepository.saveAndFlush(rent);
 
-        if(returnDate.isAfter(rent.getEndDate())){
-            this.saleService.createPenaltySale(rent,returnDate);
+        if (returnDate.isAfter(rent.getEndDate())) {
+            this.saleService.createPenaltySale(rent, returnDate);
         }
         return true;
     }

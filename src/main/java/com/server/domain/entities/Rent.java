@@ -1,19 +1,19 @@
 package com.server.domain.entities;
 
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.proxy.HibernateProxy;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Objects;
 
 @Entity
 @Table(name = "rents")
@@ -36,10 +36,10 @@ public class Rent extends BaseEntity {
     private LocalDate endDate;
 
     @Column(nullable = false)
-    private boolean isApproved;
+    private boolean approved;
 
     @Column(nullable = false)
-    private boolean isFinished;
+    private boolean finished;
 
     public Double calculatePrice() {
         long days = ChronoUnit.DAYS.between(this.startDate, this.endDate) + 1;
