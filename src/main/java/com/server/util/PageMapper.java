@@ -22,4 +22,8 @@ public class PageMapper {
         return new PageImpl<>(list, PageRequest.of(source.getNumber(), source.getSize(), source.getSort()),
                 source.getTotalElements());
     }
+
+    public static <S, T> T map(S source, Class<T> targetClass, ModelMapper mapper) {
+        return mapper.map(source, targetClass);
+    }
 }

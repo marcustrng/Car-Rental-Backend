@@ -15,4 +15,5 @@ public interface RentService {
     boolean declineRent(String id);
     boolean finishRent(LocalDate returnDate, String id);
     Page<RentViewModel> allActiveRents(Pageable pageable);
+    RentViewModel getById(String id);
 }

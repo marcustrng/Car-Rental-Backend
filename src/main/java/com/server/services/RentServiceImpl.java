@@ -79,6 +79,11 @@ public class RentServiceImpl implements RentService {
     }
 
     @Override
+    public RentViewModel getById(String id) {
+        return PageMapper.map(this.rentRepository.findById(id), RentViewModel.class, modelMapper);
+    }
+
+    @Override
     public boolean approveRent(String id) {
         Rent rent = this.rentRepository.getOne(id);
         if (rent.getId() == null) {

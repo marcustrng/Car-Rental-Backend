@@ -21,29 +21,28 @@ public class RentController {
         this.rentService = rentService;
     }
 
-
-
-
     @GetMapping("/approved")
-    public Page<RentViewModel> allApproved(Pageable pageable){
+    public Page<RentViewModel> allApproved(Pageable pageable) {
         return this.rentService.allApprovedRents(pageable);
     }
 
     @GetMapping("/active")
-    public Page<RentViewModel> allActive(Pageable pageable) {return this.rentService.allActiveRents(pageable);}
+    public Page<RentViewModel> allActive(Pageable pageable) {
+        return this.rentService.allActiveRents(pageable);
+    }
 
     @GetMapping("/unapproved")
-    public Page<RentViewModel> allUnapproved(Pageable pageable){
+    public Page<RentViewModel> allUnapproved(Pageable pageable) {
         return this.rentService.allUnapprovedRents(pageable);
     }
 
     @PostMapping("/approve/{id}")
-    public ResponseBody approveRent(@PathVariable String id){
+    public ResponseBody approveRent(@PathVariable String id) {
         ResponseBody rb = new ResponseBody();
 
         boolean result = this.rentService.approveRent(id);
 
-        if(result){
+        if (result) {
             rb.setMessage("Rent" + id + "approved successfully !");
         } else {
             rb.setMessage("Approval failed !");
@@ -53,11 +52,11 @@ public class RentController {
     }
 
     @PostMapping("/decline/{id}")
-    public ResponseBody declineRent(@PathVariable String id){
+    public ResponseBody declineRent(@PathVariable String id) {
         ResponseBody rb = new ResponseBody();
         boolean result = this.rentService.declineRent(id);
 
-        if(result){
+        if (result) {
             rb.setMessage("Rent" + id + "declined !");
         } else {
             rb.setMessage("Decline failed !");
@@ -67,17 +66,22 @@ public class RentController {
     }
 
     @PostMapping("/finish/{id}")
-    public ResponseBody finishRent(@PathVariable String id, @RequestBody @Valid RentFinishModel model){
+    public ResponseBody finishRent(@PathVariable String id, @RequestBody @Valid RentFinishModel model) {
 
         ResponseBody rb = new ResponseBody();
-        boolean result = this.rentService.finishRent(model.getDate(),id);
+        boolean result = this.rentService.finishRent(model.getDate(), id);
 
-        if(result){
+        if (result) {
             rb.setMessage("Rent" + id + "finished !");
         } else {
             rb.setMessage("Rent finish failed !");
         }
 
         return rb;
+    }
+
+    @GetMapping("/{id}")
+    public RentViewModel getById(@PathVariable String id) {
+        return this.rentService.getById(id);
     }
 }
