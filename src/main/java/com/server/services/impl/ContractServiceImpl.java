@@ -18,19 +18,21 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public void contract(SendEmailBindingModel model) {
+        String TEXT_PATTERN = "%s %s - (%s)\n\n %s";
+
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(sendTo);
         message.setSubject(model.getSubject());
-        message.setText(model.getText());
-        String FROM_PATTERN = "%s %s - (%s)";
-        message.setFrom(
+        message.setText(
                 String.format(
-                        FROM_PATTERN,
+                        TEXT_PATTERN,
                         model.getFirstName(),
                         model.getLastName(),
-                        model.getEmail()
+                        model.getEmail(),
+                        model.getText()
                 )
         );
+        message.setFrom(model.getEmail());
 
         mailSender.send(message);
     }
