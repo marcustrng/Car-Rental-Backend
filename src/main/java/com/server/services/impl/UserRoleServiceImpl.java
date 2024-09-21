@@ -1,7 +1,8 @@
-package com.server.services;
+package com.server.services.impl;
 
 import com.server.domain.entities.UserRole;
 import com.server.repositories.UserRoleRepository;
+import com.server.services.UserRoleService;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

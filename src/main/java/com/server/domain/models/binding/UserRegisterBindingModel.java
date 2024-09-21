@@ -1,56 +1,32 @@
 package com.server.domain.models.binding;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
 
-public class UserRegisterBindingModel {
-    private String username;
-    private String email;
-    private String password;
-    private String repeatPassword;
-
-    public UserRegisterBindingModel() {
-    }
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class UserRegisterBindingModel implements Serializable {
 
     @NotEmpty
     @Length(min = 4, max = 15)
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    private String username;
 
     @Email
     @Length(min = 4, max = 35)
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    private String email;
 
     @NotEmpty
     @Length(min = 4, max = 20)
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    private String password;
 
     @NotEmpty
     @Length(min = 4, max = 20)
-    public String getRepeatPassword() {
-        return repeatPassword;
-    }
-
-    public void setRepeatPassword(String repeatPassword) {
-        this.repeatPassword = repeatPassword;
-    }
+    private String repeatPassword;
 }

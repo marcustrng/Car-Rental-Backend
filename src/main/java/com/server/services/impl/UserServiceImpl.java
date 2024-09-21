@@ -1,13 +1,13 @@
-package com.server.services;
+package com.server.services.impl;
 
 import com.server.domain.entities.User;
 import com.server.domain.entities.UserRole;
 import com.server.domain.models.binding.UserRegisterBindingModel;
 import com.server.exceptions.EmailAlreadyTakenException;
-import com.server.exceptions.UserNotFoundException;
 import com.server.exceptions.UsernameAlreadyTaken;
 import com.server.repositories.UserRepository;
 import com.server.repositories.UserRoleRepository;
+import com.server.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

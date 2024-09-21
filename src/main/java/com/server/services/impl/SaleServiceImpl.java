@@ -1,10 +1,11 @@
-package com.server.services;
+package com.server.services.impl;
 
 import com.server.domain.entities.Rent;
 import com.server.domain.entities.Sale;
 import com.server.domain.enums.SaleType;
 import com.server.domain.models.view.SaleViewModel;
 import com.server.repositories.SaleRepository;
+import com.server.services.SaleService;
 import com.server.util.PageMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;

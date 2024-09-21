@@ -1,4 +1,4 @@
-package com.server.services;
+package com.server.services.impl;
 
 import com.server.domain.entities.Car;
 import com.server.domain.entities.Rent;
@@ -11,6 +11,9 @@ import com.server.exceptions.RentNotFoundException;
 import com.server.exceptions.UserNotFoundException;
 import com.server.repositories.CarRepository;
 import com.server.repositories.RentRepository;
+import com.server.services.RentService;
+import com.server.services.SaleService;
+import com.server.services.UserService;
 import com.server.util.PageMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;

@@ -1,4 +1,4 @@
-package com.server.services;
+package com.server.services.impl;
 
 import com.server.domain.entities.Car;
 import com.server.domain.entities.Rent;
@@ -9,6 +9,7 @@ import com.server.exceptions.CarHasActiveRentsException;
 import com.server.exceptions.CarNotFoundException;
 import com.server.repositories.CarRepository;
 import com.server.repositories.RentRepository;
+import com.server.services.CarService;
 import com.server.util.PageMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
