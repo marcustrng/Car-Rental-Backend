@@ -2,6 +2,7 @@ package com.server.web.controllers;
 
 
 import com.server.domain.models.binding.UserRegisterBindingModel;
+import com.server.domain.models.view.UserViewModel;
 import com.server.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,5 +26,12 @@ public class UserController {
         boolean result = this.userService.register(model);
 
         return ResponseEntity.created(new URI("/users/register")).body(result);
+    }
+
+    @GetMapping(value = "/{username}")
+    ResponseEntity<UserViewModel> getUserByUsername(@PathVariable String username) {
+        UserViewModel result = this.userService.getUserByUsername(username);
+
+        return ResponseEntity.ok().body(result);
     }
 }

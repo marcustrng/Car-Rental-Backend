@@ -36,10 +36,10 @@ public class Rent extends BaseEntity {
     private LocalDate endDate;
 
     @Column(nullable = false)
-    private boolean approved;
+    private boolean isApproved;
 
     @Column(nullable = false)
-    private boolean finished;
+    private boolean isFinished;
 
     public Double calculatePrice() {
         long days = ChronoUnit.DAYS.between(this.startDate, this.endDate) + 1;

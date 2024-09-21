@@ -29,4 +29,12 @@ public class UserRegisterBindingModel implements Serializable {
     @NotEmpty
     @Length(min = 4, max = 20)
     private String repeatPassword;
+
+    @NotEmpty
+    @Length(min = 4, max = 20)
+    private String firstName;
+
+    @NotEmpty
+    @Length(min = 4, max = 20)
+    private String lastName;
 }
